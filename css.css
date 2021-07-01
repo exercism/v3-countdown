@@ -57,6 +57,7 @@ p strong {
     align-items: center;
 }
 .countdown .part {
+    flex-basis: 0;
     flex-grow: 1;
 }
 .countdown .part:not(:last-child) {

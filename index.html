@@ -21,8 +21,18 @@
 
   <body>
     <header>
-      <img src="./img/left-shapes.svg" class="top-bg-left" alt="" role="presentation" />
-      <img src="./img/right-shapes.svg" class="top-bg-right" alt="" role="presentation" />
+      <img
+        src="./img/left-shapes.svg"
+        class="top-bg-left"
+        alt=""
+        role="presentation"
+      />
+      <img
+        src="./img/right-shapes.svg"
+        class="top-bg-right"
+        alt=""
+        role="presentation"
+      />
       <img src="./img/clock.svg" class="top-img" alt="" role="presentation" />
       <h1>It’s almost here.</h1>
       <p class="main-p">
@@ -31,16 +41,20 @@
         is about to launch.
       </p>
       <div class="countdown">
-        <div class="part" id="countdown-hours">
-          <div class="number">1340</div>
+        <div class="part">
+          <div class="number" id="countdown-days">&nbsp;</div>
+          <div class="label">days</div>
+        </div>
+        <div class="part">
+          <div class="number" id="countdown-hours">&nbsp;</div>
           <div class="label">hours</div>
         </div>
-        <div class="part" id="countdown-minutes">
-          <div class="number">59</div>
+        <div class="part">
+          <div class="number" id="countdown-minutes">&nbsp;</div>
           <div class="label">minutes</div>
         </div>
-        <div class="part" id="countdown-seconds">
-          <div class="number">12</div>
+        <div class="part">
+          <div class="number" id="countdown-seconds">&nbsp;</div>
           <div class="label">seconds</div>
         </div>
       </div>
@@ -54,37 +68,107 @@
     <article>
       <div class="features">
         <div class="feature">
-          <img src="./img/editor.svg" alt="" role="presentation"/>
+          <img src="./img/editor.svg" alt="" role="presentation" />
           <h3>Introducing the Exercism Editor</h3>
-          <p>Use our editor to solve exercises directly in the browser without setting anything up locally. (The CLI remains!)</p>
+          <p>
+            Use our editor to solve exercises directly in the browser without
+            setting anything up locally. (The CLI remains!)
+          </p>
         </div>
         <div class="feature">
-          <img src="./img/design.svg" alt="" role="presentation"/>
+          <img src="./img/design.svg" alt="" role="presentation" />
           <h3>A new look and feel</h3>
-          <p>We’ve taken Exercism to the next level with a completely revamped, fun, joyful UX.</p>
+          <p>
+            We’ve taken Exercism to the next level with a completely revamped,
+            fun, joyful UX.
+          </p>
         </div>
         <div class="feature">
-          <img src="./img/mentoring.svg" alt="" role="presentation"/>
+          <img src="./img/mentoring.svg" alt="" role="presentation" />
           <h3>All-new mentoring</h3>
-          <p>No more waiting on mentors to proceed. Invite your friends to mentor you.</p>
+          <p>
+            No more waiting on mentors to proceed. Invite your friends to mentor
+            you.
+          </p>
         </div>
         <div class="feature">
-          <img src="./img/learning.svg" alt="" role="presentation"/>
+          <img src="./img/learning.svg" alt="" role="presentation" />
           <h3>Learning mode</h3>
-          <p>Exercism's no longer just about practicing. Master Concepts to achieve fluency</p>
+          <p>
+            Exercism's no longer just about practicing. Master Concepts to
+            achieve fluency
+          </p>
         </div>
         <div class="feature">
-          <img src="./img/reputation.svg" alt="" role="presentation"/>
+          <img src="./img/reputation.svg" alt="" role="presentation" />
           <h3>Reputation &amp; badges</h3>
-          <p>See your hard work in contributing to Exercism acknowledged through Reputation. Unlock badges throughout your journey.</p>
+          <p>
+            See your hard work in contributing to Exercism acknowledged through
+            Reputation. Unlock badges throughout your journey.
+          </p>
         </div>
         <div class="feature">
-          <img src="./img/journey.svg" alt="" role="presentation"/>
+          <img src="./img/journey.svg" alt="" role="presentation" />
           <h3>Your journey</h3>
-          <p>Explore everything you’ve done on Exercism. From your learning, mentoring to your contributions.</p>
+          <p>
+            Explore everything you’ve done on Exercism. From your learning,
+            mentoring to your contributions.
+          </p>
         </div>
       </div>
       <hr class="seperator --large" />
     </article>
   </body>
+
+  <script>
+    /* Taken from https://codepen.io/mathew-c/pen/waXWvO */
+    function countdown(dateEnd) {
+      var timer, days, hours, minutes, seconds;
+
+      dateEnd = new Date(dateEnd);
+      dateEnd = dateEnd.getTime();
+
+      if (isNaN(dateEnd)) { return; }
+
+      timer = setInterval(calculate, 1000);
+
+      function calculate() {
+        var dateStart = new Date();
+        var dateStart = new Date(
+          dateStart.getUTCFullYear(),
+          dateStart.getUTCMonth(),
+          dateStart.getUTCDate(),
+          dateStart.getUTCHours(),
+          dateStart.getUTCMinutes(),
+          dateStart.getUTCSeconds()
+        );
+            console.log(dateStart.getTime())
+            console.log(dateEnd)
+        var timeRemaining = parseInt((dateEnd - dateStart.getTime()) / 1000);
+
+        if (timeRemaining >= 0) {
+          days = parseInt(timeRemaining / 86400);
+          timeRemaining = timeRemaining % 86400;
+          hours = parseInt(timeRemaining / 3600);
+          timeRemaining = timeRemaining % 3600;
+          minutes = parseInt(timeRemaining / 60);
+          timeRemaining = timeRemaining % 60;
+          seconds = parseInt(timeRemaining);
+
+          document.getElementById("countdown-days").innerHTML = parseInt(days, 10);
+          document.getElementById("countdown-hours").innerHTML = ("0" + hours).slice(-2);
+          document.getElementById("countdown-minutes").innerHTML = ("0" + minutes).slice(
+            -2
+          );
+          document.getElementById("countdown-seconds").innerHTML = ("0" + seconds).slice(
+            -2
+          );
+        } else {
+          return;
+        }
+      }
+    }
+
+    countdown("09/01/2021 12:00:00 PM");
+  </script>
 </html>
